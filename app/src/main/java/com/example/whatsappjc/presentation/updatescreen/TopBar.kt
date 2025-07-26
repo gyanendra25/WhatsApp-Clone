@@ -35,7 +35,6 @@ fun TopBar() {
 
     var isSearching by remember { mutableStateOf(false) }
     var search by remember { mutableStateOf("") }
-
     var showMenu by remember { mutableStateOf(false) }
 
     Box(modifier = Modifier.fillMaxWidth()) {
