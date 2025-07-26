@@ -3,8 +3,13 @@ package com.example.whatsappjc.presentation.updatescreen
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -31,6 +36,8 @@ fun TopBar() {
     var isSearching by remember { mutableStateOf(false) }
     var search by remember { mutableStateOf("") }
 
+    var showMenu by remember { mutableStateOf(false) }
+
     Box(modifier = Modifier.fillMaxWidth()) {
         Column() {
             Row() {
@@ -54,16 +61,60 @@ fun TopBar() {
                         fontSize = 28.sp,
                         color = Color.Black,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(start = 12.dp, top = 8.dp)
+                        modifier = Modifier.padding(start = 12.dp, top = 12.dp)
                     )
                 }
-                if (isSearching){
+
+                Spacer(modifier = Modifier.weight(1f))
+                if (isSearching) {
                     IconButton(onClick = { isSearching = false }) {
-                        Icon(painter = painterResource(id = R.drawable.cross), contentDescription = null)
+                        Icon(
+                            painter = painterResource(id = R.drawable.cross),
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                } else {
+                    IconButton(onClick = { }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.camera),
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+                    IconButton(onClick = { isSearching = true }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.search),
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp)
+                        )
                     }
 
+
+                    IconButton(onClick = {
+                        showMenu = true
+                    }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.more),
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp)
+                        )
+
+                        DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
+                            DropdownMenuItem(
+                                text = { Text(text = "Status Privacy") },
+                                onClick = { showMenu = false })
+                            DropdownMenuItem(
+                                text = { Text(text = "Create channel") },
+                                onClick = { showMenu = false })
+                            DropdownMenuItem(
+                                text = { Text(text = "Settings") },
+                                onClick = { showMenu = false })
+                        }
+                    }
                 }
             }
+            HorizontalDivider()
         }
     }
 }

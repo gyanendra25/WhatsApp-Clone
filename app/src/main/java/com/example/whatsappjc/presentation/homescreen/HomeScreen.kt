@@ -141,9 +141,6 @@ fun HomeScreen() {
             time = "12:00",
             message = "Hello"
         )
-
-
-
     )
 
     Scaffold(
